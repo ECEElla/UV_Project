@@ -45,9 +45,7 @@ For each mode, data was recorded as follows:
 
 20 samples using the red filter
 20 samples using the blue filter
-
 The samples for each configuration were averaged to reduce noise.
-
 Additional measurements were taken in direct sunlight using the blue filter only.
 These measurements provided a baseline for real UV exposure.
 
@@ -59,25 +57,19 @@ The ratios and their corresponding class labels (0, 1, 2) were uploaded into Edg
 Edge Impulse Model:
 
 Input: Blue/Red ratio
-
 Output: UV class (0, 1, or 2)
-
 Model Type: Small fully connected neural network
-
 Deployment: C++ inference library running on the Arduino Nano 33 BLE
-
 The device performs on-board inference and outputs UV class and recommended SPF based on the model’s prediction.
 
 Operation Procedure:
 
 Upload uv_classifier.ino to the Arduino Nano 33 BLE.
-
 Open the Serial Monitor at 115200 baud.
 
 When prompted:
 
 Place the red filter over the photodiode.
-
 Place the blue filter over the photodiode.
 
 The device prints:
