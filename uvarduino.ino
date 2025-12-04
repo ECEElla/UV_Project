@@ -1,37 +1,36 @@
 /*
   UV Intensity Classification Using Photodiode + Optical Filters
   --------------------------------------------------------------
-  This program runs a UV intensity classifier on the Arduino Nano 33 BLE 
-  using a photodiode paired with optical filters. The system does not use a 
-  dedicated UV sensor. Instead, UV level is estimated using the ratio of light 
-  transmitted through a blue filter versus a red filter.
+  This project estimates UV intensity using an Arduino Nano 33 BLE, a
+  photodiode, and two optical filters (red and blue). No UV sensor is used;
+  instead, UV levels are inferred from the ratio of blue-filter light to
+  red-filter light.
 
-  - The blue filter allows more UV and shorter-wavelength light to pass.
-  - The red filter blocks most UV and blue light, passing mostly longer wavelengths.
+  - Red filter blocks most blue/UV wavelengths.
+  - Blue filter passes more blue/UV wavelengths.
+  - ratio = blue_adc / red_adc gives a relative UV indicator.
 
-  By comparing the averaged ADC readings through each filter, we can compute:
+  Data was collected using:
+    - Ring light (warm mode) — red + blue filter (20 samples each)
+    - Ring light (cool mode) — red + blue filter (20 samples each)
+    - Direct sunlight — blue filter (20 samples baseline)
 
-      ratio = blue_filter_adc / red_filter_adc
+  A dataset was created, uploaded into Edge Impulse, and used to train a
+  classifier to output 3 UV classes:
+      Class 0 = Low UV
+      Class 1 = Medium UV
+      Class 2 = High UV
 
-  This ratio correlates with relative UV intensity independent of overall brightness.
-  
-  Collected data (warm light, cool light, and direct sunlight) was used to train 
-  an Edge Impulse model with 3 classes:
-      0 = Low UV
-      1 = Medium UV
-      2 = High UV
-
-  The Edge Impulse model is deployed on the Nano 33 BLE and classifies UV level 
-  in real time. The sketch then outputs a recommended SPF value based on the 
-  predicted UV class.
+  The trained Edge Impulse model runs on the Nano 33 BLE and outputs UV class
+  and recommended SPF levels in real time.
 
   Hardware:
     - Arduino Nano 33 BLE
-    - Photodiode connected to analog input
-    - Blue filter (passes more UV/blue light)
-    - Red filter (blocks UV/blue, passes longer wavelengths)
-    
+    - Photodiode → analog input
+    - Blue and red optical filters
+
 */
+
 
 #include <Arduino.h>
 #include <UVSENSOR_inferencing.h>  
