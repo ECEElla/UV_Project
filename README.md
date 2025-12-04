@@ -45,18 +45,19 @@ For each mode, data was recorded as follows:
 
 20 samples using the red filter
 20 samples using the blue filter
+20 samples using the clear filter
 The samples for each configuration were averaged to reduce noise.
-Additional measurements were taken in direct sunlight using the blue filter only.
+Additional measurements were taken in direct sunlight using the blue and clear filter only.
 These measurements provided a baseline for real UV exposure.
 
-For each condition, a ratio was computed: ratio = blue_filter_adc / red_filter_adc
+For each condition, a ratio was computed: ratio = blue_filter_adc / clear_filter_adc
 
 This ratio eliminates brightness differences and isolates UV-related changes.
 The ratios and their corresponding class labels (0, 1, 2) were uploaded into Edge Impulse for model training.
 
 Edge Impulse Model:
 
-Input: Blue/Red ratio
+Input: Blue/Clear ratio
 Output: UV class (0, 1, or 2)
 Model Type: Small fully connected neural network
 Deployment: C++ inference library running on the Arduino Nano 33 BLE
@@ -69,11 +70,12 @@ Open the Serial Monitor at 115200 baud.
 
 When prompted:
 
-Place the blue filter over the photodiode.
+Place the clear filter over the photodiode.
+Then, Place the blue filter over the photodiode.
 
 The device prints:
 
-Red filter ADC value
+Clear filter ADC value
 Blue filter ADC value
 Computed ratio
 Predicted UV class
