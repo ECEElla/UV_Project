@@ -1,9 +1,74 @@
 # EE-105-Final-Project
-UV Classification Using Photodiode + Optical Filters (Arduino Nano 33 BLE + Edge Impulse)
 
-This project estimates UV intensity without using a UV sensor.
-Instead, the system uses a photodiode combined with optical filters (red and blue) and a machine-learning classifier trained with Edge Impulse.
+UV Classification Using Photodiode and Optical Filters
 
-We discovered that by comparing the light that passes through a blue filter versus a red filter, we can estimate how much short-wavelength / UV light is present in the environment.
+Arduino Nano 33 BLE + Edge Impulse
+This project estimates relative UV intensity using an Arduino Nano 33 BLE, a photodiode, and two optical filters (red and blue). No dedicated UV sensor is used. Instead, UV levels are inferred by comparing how much light passes through each filter:
+The red filter blocks most blue and UV wavelengths.
+The blue filter allows more blue and UV wavelengths to pass.
+By measuring light through both filters and computing their ratio, the system obtains a UV-related signal. This ratio is then classified using a machine-learning model trained in Edge Impulse.
 
-This method allowed us to classify UV exposure levels on a simple embedded device (Arduino Nano 33 BLE).
+Project Overview
+
+The goal of this project was to classify UV exposure levels using low-cost components and embedded machine learning. A photodiode alone cannot isolate UV light from visible light, so we used optical filtering to indirectly estimate UV content. The ratio of light measured through the blue filter versus the red filter correlates with relative UV intensity.
+
+A dataset was collected under different lighting conditions, processed, and used to train a three-class classifier in Edge Impulse:
+Class 0 – Low UV
+Class 1 – Medium UV
+Class 2 – High UV
+The trained model runs directly on the Arduino Nano 33 BLE and outputs a UV level and SPF recommendation.
+
+Hardware
+
+Arduino Nano 33 BLE
+Photodiode connected to analog input
+Red optical filter
+Blue optical filter
+Adjustable ring light (for indoor testing)
+
+Data Collection Procedure
+
+A ring light was used as a controlled indoor light source.
+The ring light was positioned at a fixed angle relative to the photodiode for consistency.
+
+Two lighting modes were tested:
+Warm light
+Cool light
+For each mode, data was recorded as follows:
+
+20 samples using the red filter
+20 samples using the blue filter
+The samples for each configuration were averaged to reduce noise.
+
+Additional measurements were taken in direct sunlight using the blue filter only.
+These measurements provided a baseline for real UV exposure.
+
+For each condition, a ratio was computed: ratio = blue_filter_adc / red_filter_adc
+
+This ratio eliminates brightness differences and isolates UV-related changes.
+The ratios and their corresponding class labels (0, 1, 2) were uploaded into Edge Impulse for model training.
+
+Edge Impulse Model
+
+Input: Blue/Red ratio
+Output: UV class (0, 1, or 2)
+Model Type: Small fully connected neural network
+Deployment: C++ inference library running on the Arduino Nano 33 BLE
+The device performs on-board inference and outputs UV class and recommended SPF based on the model’s prediction.
+
+Operation Procedure
+
+Upload uv_classifier.ino to the Arduino Nano 33 BLE.
+Open the Serial Monitor at 115200 baud.
+
+When prompted:
+Place the red filter over the photodiode.
+Place the blue filter over the photodiode.
+
+The device prints:
+Red filter ADC value
+Blue filter ADC value
+Computed ratio
+Predicted UV class
+SPF recommendation
+SPF Guidelines
