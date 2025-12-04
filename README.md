@@ -23,7 +23,7 @@ Class 2 – High UV
 
 The trained model runs directly on the Arduino Nano 33 BLE and outputs a UV level and SPF recommendation.
 
-Hardware
+Hardware:
 
 Arduino Nano 33 BLE
 Photodiode connected to analog input
@@ -31,7 +31,7 @@ Red optical filter
 Blue optical filter
 Adjustable ring light (for indoor testing)
 
-Data Collection Procedure
+Data Collection Procedure:
 
 A ring light was used as a controlled indoor light source.
 The ring light was positioned at a fixed angle relative to the photodiode for consistency.
@@ -56,7 +56,7 @@ For each condition, a ratio was computed: ratio = blue_filter_adc / red_filter_a
 This ratio eliminates brightness differences and isolates UV-related changes.
 The ratios and their corresponding class labels (0, 1, 2) were uploaded into Edge Impulse for model training.
 
-Edge Impulse Model
+Edge Impulse Model:
 
 Input: Blue/Red ratio
 
@@ -68,7 +68,7 @@ Deployment: C++ inference library running on the Arduino Nano 33 BLE
 
 The device performs on-board inference and outputs UV class and recommended SPF based on the model’s prediction.
 
-Operation Procedure
+Operation Procedure:
 
 Upload uv_classifier.ino to the Arduino Nano 33 BLE.
 
