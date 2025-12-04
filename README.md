@@ -69,7 +69,6 @@ Open the Serial Monitor at 115200 baud.
 
 When prompted:
 
-Place the red filter over the photodiode.
 Place the blue filter over the photodiode.
 
 The device prints:
