@@ -82,7 +82,7 @@ void setup() {
     float ratio = blue_adc / clear_adc;
     features[0] = ratio;
 
-    // ---- 3.5 FIXED CLASSIFICATION BASED ON YOUR RANGES ----
+    // ---- 3.5 CLASSIFICATION BASED ON RANGES ----
     // <0.33  → Low
     // 0.33–0.75 → Medium  
     // >0.75  → High      
