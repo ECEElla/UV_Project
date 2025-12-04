@@ -3,6 +3,7 @@
 UV Classification Using Photodiode and Optical Filters
 
 Arduino Nano 33 BLE + Edge Impulse
+
 This project estimates relative UV intensity using an Arduino Nano 33 BLE, a photodiode, and two optical filters (red and blue). No dedicated UV sensor is used. Instead, UV levels are inferred by comparing how much light passes through each filter:
 The red filter blocks most blue and UV wavelengths.
 The blue filter allows more blue and UV wavelengths to pass.
