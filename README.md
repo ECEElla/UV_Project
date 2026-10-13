@@ -1,5 +1,3 @@
-# EE-105-Final-Project
-
 UV Classification Using Photodiode and Optical Filters
 
 Arduino Nano 33 BLE + Edge Impulse
